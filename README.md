@@ -1,6 +1,6 @@
 <div align="center">
 <br/>
-<img src="https://readme-typing-svg.demolab.com?font=Space+Mono&weight=700&size=48&duration=3000&pause=1000&color=FFFFFF&center=true&vCenter=true&width=800&height=90&lines=AREA+WATCH;SEE+YOUR+AREA.+CHANGE+YOUR+AREA." alt="AREAWATCH" />
+<img src="https://readme-typing-svg.demolab.com?font=Space+Mono&weight=700&size=48&duration=3000&pause=1000&color=FFFFFF&center=true&vCenter=true&width=800&height=90&lines=NAGARWATCH;SEE+YOUR+AREA.+CHANGE+YOUR+AREA." alt="NAGARWATCH" />
 <br/>
 
 GEOSPATIAL INTELLIGENCE · CIVIC TECHNOLOGY · COMMUNITY SAFETY
@@ -12,15 +12,11 @@ GEOSPATIAL INTELLIGENCE · CIVIC TECHNOLOGY · COMMUNITY SAFETY
 <img src="https://img.shields.io/badge/POSTGIS-ENABLED-4169E1?style=flat-square&logo=postgresql&logoColor=white&labelColor=101827" />
 <img src="https://img.shields.io/badge/SUPABASE-POWERED-3FCF8E?style=flat-square&logo=supabase&logoColor=white&labelColor=101827" />
 
-Your neighbourhood has a story. Areawatch helps make it heard.
+Your neighbourhood has a story. NagarWatch helps make it heard.
 
 <br/>
 
-Overview  · 
-Features  · 
-Architecture  · 
-Installation  · 
-API
+Overview · Features · Architecture · Installation · API
 
 <br/>
 </div>
@@ -35,13 +31,12 @@ A better way to watch over your neighbourhood.
 
 </div>
 
-Areawatch is a geospatial civic intelligence platform that connects citizens, local communities and municipal authorities through location-aware issue reporting.
+NagarWatch is a geospatial civic intelligence platform that connects citizens, local communities and municipal authorities through location-aware issue reporting.
 
 A photograph can reveal more than a problem. It can reveal where it happened, which municipal ward is responsible, and how nearby residents can contribute towards resolving it.
 
-Areawatch brings this entire process into one connected platform — from the first report to administrative action and community engagement.
+NagarWatch brings this entire process into one connected platform — from the first report to administrative action and community engagement.
 
-<br/>
 <div align="center">
 
 REPORT	LOCATE	CONNECT	RESOLVE
@@ -66,7 +61,7 @@ Six capabilities. One connected civic ecosystem.
 
 A photograph is the starting point.
 
-Citizens can submit infrastructure complaints by uploading photographs. Areawatch extracts embedded GPS metadata using EXIF processing to identify the reported location.
+Citizens can submit infrastructure complaints by uploading photographs. NagarWatch extracts embedded GPS metadata using EXIF processing to identify the reported location.
 
 * Automatic GPS metadata extraction
 * Image processing and storage
@@ -76,7 +71,7 @@ Citizens can submit infrastructure complaints by uploading photographs. Areawatc
 
 Every issue belongs somewhere.
 
-Using PostgreSQL and PostGIS, Areawatch identifies the municipal ward associated with a complaint through spatial boundary queries.
+Using PostgreSQL and PostGIS, NagarWatch identifies the municipal ward associated with a complaint through spatial boundary queries.
 
 * ST_Contains for ward identification
 * Geographic boundary matching
@@ -97,7 +92,7 @@ The Super Admin interface provides a dedicated geospatial environment for creati
 
 One administrator. Multiple jurisdictions.
 
-Areawatch uses a many-to-many relational architecture for administrative assignments.
+NagarWatch uses a many-to-many relational architecture for administrative assignments.
 
 * Assign multiple wards to one administrator
 * Allocate and revoke permissions
@@ -163,9 +158,9 @@ It is the intelligence behind the platform.
 
 </div>
 
-Areawatch uses PostGIS to connect reported incidents with real geographic boundaries.
+NagarWatch uses PostGIS to connect reported incidents with real geographic boundaries.
 
-Ward identification
+Ward Identification
 
 When a complaint is submitted, its coordinates can be checked against existing ward polygons.
 
@@ -179,7 +174,7 @@ WHERE ST_Contains(
     )
 );
 
-Duplicate proximity checking
+Duplicate Proximity Checking
 
 The platform uses geographic distance calculations to identify potentially redundant active complaints.
 
@@ -240,7 +235,7 @@ flowchart TB
     E --> L
     G --> M
 
-Technology stack
+Technology Stack
 
 Layer	Technology
 Frontend framework	React 19
@@ -267,7 +262,7 @@ Image metadata	EXIF GPS extraction
 Inside the codebase.
 
 </div>
-Areawatch/
+NagarWatch/
 │
 ├── backend/
 │   ├── app.py
@@ -297,7 +292,7 @@ Areawatch/
 
 07 / GETTING STARTED
 
-Run Areawatch locally.
+Run NagarWatch locally.
 
 </div>
 
@@ -311,7 +306,7 @@ Requirements
 <details>
 <summary><b>01 — Clone the repository</b></summary>
 git clone YOUR_REPOSITORY_URL
-cd Areawatch
+cd NagarWatch
 </details>
 <details>
 <summary><b>02 — Configure the backend</b></summary>
@@ -340,8 +335,10 @@ DB_USER=your_database_user
 DB_PASS=your_database_password
 DB_PORT=5432
 SUPABASE_URL=your_supabase_project_url
-SUPABASE_KEY=your_supabase_service_role_key
+SUPABASE_KEY=your_backend_supabase_key
 SUPABASE_BUCKET=your_storage_bucket_name
+
+Use the exact environment variable names required by your backend configuration. Never commit .env files or expose service-role credentials.
 
 Start Flask:
 
@@ -350,7 +347,6 @@ python app.py
 Backend:
 
 http://localhost:5000
-
 </details>
 <details>
 <summary><b>03 — Configure the frontend</b></summary>
@@ -373,7 +369,6 @@ npm run dev
 Frontend:
 
 http://localhost:5173
-
 </details>
 
 ⸻
@@ -432,12 +427,12 @@ Three roles. One ecosystem.
 
 </div>
 
-ROLE	ACCESS & RESPONSIBILITY
+Role	Access & Responsibility
 Citizen	Report issues, explore complaints and upvote community reports.
 Administrator	Manage complaints within assigned municipal wards.
 Super Administrator	Govern ward boundaries, user access and administrative assignments.
 
-Areawatch’s many-to-many administrative architecture allows a single administrator to manage multiple wards.
+NagarWatch’s many-to-many administrative architecture allows a single administrator to manage multiple wards.
 
 Security: Service-role credentials must remain server-side. Never commit .env files or expose privileged credentials in frontend code.
 
@@ -454,12 +449,12 @@ A pothole. A broken streetlight. An overflowing garbage point.
 
 Small problems can have a big impact on everyday life.
 
-Areawatch aims to make these problems visible, connect the people affected by them, and bring them closer to the authorities responsible for resolving them.
+NagarWatch aims to make these problems visible, connect the people affected by them, and bring them closer to the authorities responsible for resolving them.
 
 <br/>
-<img src="https://readme-typing-svg.demolab.com?font=Space+Mono&weight=700&size=23&pause=1600&color=38BDF8&center=true&vCenter=true&width=700&height=45&lines=SEE+YOUR+AREA.;UNDERSTAND+YOUR+AREA.;IMPROVE+YOUR+AREA." alt="Areawatch closing animation" />
+<img src="https://readme-typing-svg.demolab.com?font=Space+Mono&weight=700&size=23&pause=1600&color=38BDF8&center=true&vCenter=true&width=700&height=45&lines=SEE+YOUR+AREA.;UNDERSTAND+YOUR+AREA.;IMPROVE+YOUR+AREA." alt="NagarWatch closing animation" />
 
-AREAWATCH
+NAGARWATCH
 
 Geospatial Intelligence for Better Communities.
 
