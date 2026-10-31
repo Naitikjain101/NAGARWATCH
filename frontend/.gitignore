@@ -1,0 +1,15 @@
+# Environment secrets — NEVER commit
+.env
+.env.*
+!.env.example
+
+# Dependencies & Build
+node_modules/
+dist/
+build/
+.vite/
+.vitest-cache/
+
+# OS / Editor
+.DS_Store
+*.log

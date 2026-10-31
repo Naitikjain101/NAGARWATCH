@@ -1,0 +1,281 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* ─── Typography Families ────────────────────────────────────────────────── */
+  --font-serif: 'Instrument Serif', Georgia, Cambria, 'Times New Roman', serif;
+  --font-heading: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  /* ─── Visual Design System: Warm Paper Palette (Citizen Portal) ──────────── */
+  --color-nw-paper-base: #F4F1EA;
+  --color-nw-paper-raised: #FBF9F4;
+  --color-nw-paper-subtle: #EFECE4;
+  --color-nw-paper-border: #E5E0D4;
+  --color-nw-paper-ink: #1C1917;
+  --color-nw-paper-muted: #57534E;
+
+  /* ─── Visual Design System: Warm Graphite Palette (Ops & Command Center) ─── */
+  --color-nw-graphite-base: #18181B;
+  --color-nw-graphite-surface: #222226;
+  --color-nw-graphite-elevated: #2B2B30;
+  --color-nw-graphite-border: #333338;
+  --color-nw-graphite-text: #F4F4F5;
+  --color-nw-graphite-muted: #A1A1AA;
+
+  /* ─── Single Sharp Accent: Signal Vermilion ──────────────────────────────── */
+  --color-nw-vermilion: #D9381E;
+  --color-nw-vermilion-hover: #B82810;
+  --color-nw-vermilion-dark: #F05030;
+
+  /* ─── Multi-Modal Status Set (Hue + Shape + Text AA Contrast) ────────────── */
+  /* Open / Reported: Steel Blue */
+  --color-nw-status-reported: #1E5A8A;
+  --color-nw-status-reported-bg: #EBF3FA;
+  --color-nw-status-reported-border: #BCD6ED;
+  --color-nw-status-reported-dark: #6BA3D6;
+
+  /* Verified: Deep Teal */
+  --color-nw-status-verified: #0E6F64;
+  --color-nw-status-verified-bg: #E6F7F5;
+  --color-nw-status-verified-border: #A7E3DC;
+  --color-nw-status-verified-dark: #38B2AC;
+
+  /* Assigned: Ochre */
+  --color-nw-status-assigned: #8C5303;
+  --color-nw-status-assigned-bg: #FEF7EA;
+  --color-nw-status-assigned-border: #F7D7A3;
+  --color-nw-status-assigned-dark: #E2A03F;
+
+  /* In Progress: Warm Amber */
+  --color-nw-status-in-progress: #92400E;
+  --color-nw-status-in-progress-bg: #FEF3C7;
+  --color-nw-status-in-progress-border: #FCD34D;
+  --color-nw-status-in-progress-dark: #F59E0B;
+
+  /* Resolved: Forest Green */
+  --color-nw-status-resolved: #166534;
+  --color-nw-status-resolved-bg: #EDF7F0;
+  --color-nw-status-resolved-border: #B7E4C7;
+  --color-nw-status-resolved-dark: #4ADE80;
+
+  /* Rejected: Signal Crimson */
+  --color-nw-status-rejected: #991B1B;
+  --color-nw-status-rejected-bg: #FEE2E2;
+  --color-nw-status-rejected-border: #FCA5A5;
+  --color-nw-status-rejected-dark: #F87171;
+
+  /* Urgent: Restrained Crimson */
+  --color-nw-status-urgent: #B91C1C;
+  --color-nw-status-urgent-bg: #FEF2F2;
+  --color-nw-status-urgent-border: #F87171;
+  --color-nw-status-urgent-dark: #EF4444;
+
+  /* ─── Backward-Compatible Alias Tokens ───────────────────────────────────── */
+  --color-nw-light-bg: #F4F1EA;
+  --color-nw-light-surface: #FBF9F4;
+  --color-nw-light-subtle: #EFECE4;
+  --color-nw-light-border: #E5E0D4;
+  --color-nw-light-primary: #1C1917;
+  --color-nw-light-text: #1C1917;
+  --color-nw-light-secondary: #57534E;
+  --color-nw-light-accent: #D9381E;
+  --color-nw-light-accent-hover: #B82810;
+
+  --color-nw-dark-bg: #18181B;
+  --color-nw-dark-surface: #222226;
+  --color-nw-dark-elevated: #2B2B30;
+  --color-nw-dark-border: #333338;
+  --color-nw-dark-primary-text: #F4F4F5;
+  --color-nw-dark-secondary-text: #A1A1AA;
+  --color-nw-dark-accent: #F05030;
+}
+
+:root {
+  /* Dynamic CSS Custom Properties - Default Light Mode */
+  --nw-bg: #F4F1EA;
+  --nw-surface: #FBF9F4;
+  --nw-subtle: #EFECE4;
+  --nw-border: #E5E0D4;
+  --nw-text-primary: #1C1917;
+  --nw-text-secondary: #57534E;
+  --nw-accent: #D9381E;
+  --nw-accent-hover: #B82810;
+
+  /* Dark Command Center Variables */
+  --nw-dark-bg: #18181B;
+  --nw-dark-surface: #222226;
+  --nw-dark-elevated: #2B2B30;
+  --nw-dark-border: #333338;
+  --nw-dark-text: #F4F4F5;
+  --nw-dark-secondary: #A1A1AA;
+  --nw-dark-accent: #F05030;
+
+  /* Semantic Status Tokens */
+  --nw-status-reported: #1E5A8A;
+  --nw-status-verified: #0E6F64;
+  --nw-status-assigned: #8C5303;
+  --nw-status-in-progress: #92400E;
+  --nw-status-resolved: #166534;
+  --nw-status-rejected: #991B1B;
+  --nw-status-urgent: #B91C1C;
+}
+
+.dark {
+  /* Dynamic CSS Custom Properties - Dark Mode */
+  --nw-bg: #18181B;
+  --nw-surface: #222226;
+  --nw-subtle: #2B2B30;
+  --nw-border: #333338;
+  --nw-text-primary: #F4F4F5;
+  --nw-text-secondary: #A1A1AA;
+  --nw-accent: #F05030;
+  --nw-accent-hover: #D9381E;
+
+  /* Dark mode status tokens */
+  --nw-status-reported: #6BA3D6;
+  --nw-status-verified: #38B2AC;
+  --nw-status-assigned: #E2A03F;
+  --nw-status-in-progress: #F59E0B;
+  --nw-status-resolved: #4ADE80;
+  --nw-status-rejected: #F87171;
+  --nw-status-urgent: #EF4444;
+}
+
+/* ─── Typography Utilities ──────────────────────────────────────────────────── */
+@utility font-serif {
+  font-family: var(--font-serif);
+}
+
+@utility font-masthead {
+  font-family: var(--font-serif);
+  letter-spacing: -0.02em;
+}
+
+@utility font-heading {
+  font-family: var(--font-heading);
+}
+
+@utility font-sans {
+  font-family: var(--font-sans);
+}
+
+@utility text-display {
+  font-family: var(--font-serif);
+  font-size: 2.75rem;
+  line-height: 1.1;
+  font-weight: 400;
+  letter-spacing: -0.025em;
+}
+
+@utility text-h1 {
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  line-height: 1.2;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+
+@utility text-h2 {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  line-height: 1.625rem;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+
+@utility text-h3 {
+  font-family: var(--font-heading);
+  font-size: 1.0625rem;
+  line-height: 1.5rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+@utility text-body {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  line-height: 1.35rem;
+  font-weight: 400;
+}
+
+@utility text-body-medium {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  line-height: 1.35rem;
+  font-weight: 500;
+}
+
+@utility text-caption {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 500;
+}
+
+@utility text-overline {
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  line-height: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+@utility font-mono-id {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ─── Base Styles ───────────────────────────────────────────────────────────── */
+@layer base {
+  body {
+    background-color: var(--nw-bg);
+    color: var(--nw-text-primary);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* Accessible focus ring utility */
+.focus-ring {
+  outline: none;
+  box-shadow: 0 0 0 2px #FBF9F4, 0 0 0 4px #D9381E;
+}
+
+.focus-ring-dark {
+  outline: none;
+  box-shadow: 0 0 0 2px #18181B, 0 0 0 4px #F05030;
+}
+
+/* Custom restrained scrollbars */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #D8D2C5;
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #BFB8A9;
+}
+
+/* Dark command center scrollbar */
+.dark-scrollbar::-webkit-scrollbar-thumb {
+  background: #333338;
+  border-radius: 2px;
+}
+
+.dark-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #44444C;
+}

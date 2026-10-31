@@ -1,0 +1,17 @@
+# Environment secrets — NEVER commit
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+venv/
+.venv/
+
+# Uploads
+uploads/
+
+# Logs
+*.log

@@ -1,0 +1,5 @@
+{
+  "name": "Civic Snap",
+  "description": "A civic issue reporting app allowing users to snap photos of issues, verify with EXIF data, and track report status.",
+  "requestFramePermissions": ["camera", "geolocation"]
+}
