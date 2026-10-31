@@ -1,0 +1,16 @@
+{
+  "name": "areawatch",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "description": "AreaWatch / NagarWatch — Civic Incident Management & Intelligence Platform",
+  "scripts": {
+    "dev": "node dev.mjs",
+    "dev:frontend": "npm --prefix frontend run dev:vite",
+    "dev:backend": "cd backend && (venv/bin/python3 app.py 2>/dev/null || python3 app.py)",
+    "build": "npm --prefix frontend run build",
+    "test": "npm run test:backend && npm run test:frontend",
+    "test:frontend": "npm --prefix frontend run test",
+    "test:backend": "cd backend && (venv/bin/pytest 2>/dev/null || pytest)"
+  }
+}
