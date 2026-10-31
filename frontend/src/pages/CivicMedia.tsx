@@ -571,7 +571,7 @@ export default function ExplorePage() {
           {!loading && filteredIncidents.length === 0 && (
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none p-4 z-10">
               <div className="bg-[#FBF9F4]/95 border border-[#E5E0D4] p-5 rounded-sm shadow-md text-center max-w-sm pointer-events-auto">
-                <p className="font-serif text-lg text-[#1C1917] mb-1">No Active Incidents Found</p>
+                <p className="font-mono font-bold text-lg text-[#1C1917] mb-1">No Active Incidents Found</p>
                 <p className="text-xs text-[#57534E] mb-3">
                   No hazards match the active filter criteria in this sector.
                 </p>
@@ -594,7 +594,7 @@ export default function ExplorePage() {
         >
           {/* Drawer Header */}
           <div className="p-3 border-b border-[#E5E0D4] dark:border-[#333338] bg-[#EFECE4]/60 dark:bg-[#18181B]/60 flex items-center justify-between">
-            <span className="font-serif text-sm text-[#1C1917] dark:text-[#F4F4F5] font-semibold">
+            <span className="font-mono text-sm text-[#1C1917] dark:text-[#F4F4F5] font-bold">
               Dispatches in Sector ({filteredIncidents.length})
             </span>
             <button

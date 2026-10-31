@@ -96,7 +96,7 @@ function createStatusPin(
         justify-content: center;
         cursor: pointer;
         color: ${textColor};
-        font-family: var(--font-sans), system-ui, sans-serif;
+        font-family: var(--font-primary), monospace;
         font-size: ${isSelected ? '12px' : '10px'};
         font-weight: 700;
         line-height: 1;
@@ -133,7 +133,7 @@ function createClusterPin(count: number, theme: 'paper' | 'graphite'): L.DivIcon
         justify-content: center;
         cursor: pointer;
         color: ${textColor};
-        font-family: var(--font-mono), monospace;
+        font-family: var(--font-primary), monospace;
         font-size: ${isLarge ? '12px' : '11px'};
         font-weight: 700;
         letter-spacing: -0.02em;

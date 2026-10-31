@@ -134,7 +134,7 @@ export const AdminOverviewPage: React.FC = () => {
     return (
       <div className="p-6 bg-[#222226] border border-[#333338] rounded-sm max-w-xl mx-auto my-12 text-center">
         <AlertTriangle className="w-8 h-8 text-[#F05030] mx-auto mb-3" />
-        <h3 className="text-base font-serif text-[#F4F4F5] mb-1">Operational Telemetry Offline</h3>
+        <h3 className="text-base font-mono font-bold text-[#F4F4F5] mb-1">Operational Telemetry Offline</h3>
         <p className="text-xs text-[#A1A1AA] mb-4">{error}</p>
         <button
           onClick={fetchDashboardData}
@@ -166,7 +166,7 @@ export const AdminOverviewPage: React.FC = () => {
               Live Feed
             </span>
           </div>
-          <h1 className="text-2xl sm:text-3xl font-serif text-[#F4F4F5] tracking-tight">
+          <h1 className="text-2xl sm:text-3xl font-mono font-bold text-[#F4F4F5] tracking-tight">
             Operational Overview
           </h1>
           <p className="text-xs text-[#A1A1AA] mt-1 max-w-xl">
@@ -225,7 +225,7 @@ export const AdminOverviewPage: React.FC = () => {
               <span className="text-[11px] font-mono uppercase tracking-wider">Total</span>
               <Layers className="w-3.5 h-3.5 text-[#A1A1AA]" />
             </div>
-            <p className="text-3xl font-serif text-[#F4F4F5] font-semibold">{totalCount}</p>
+            <p className="text-3xl font-mono text-[#F4F4F5] font-bold">{totalCount}</p>
             <p className="text-[11px] text-[#A1A1AA] mt-1 font-sans">Accessible Reports</p>
           </div>
 
@@ -235,7 +235,7 @@ export const AdminOverviewPage: React.FC = () => {
               <span className="text-[11px] font-mono uppercase tracking-wider">Reported</span>
               <Clock className="w-3.5 h-3.5" />
             </div>
-            <p className="text-3xl font-serif text-amber-400 font-semibold">{reportedCount}</p>
+            <p className="text-3xl font-mono text-amber-400 font-bold">{reportedCount}</p>
             <p className="text-[11px] text-[#A1A1AA] mt-1 font-sans">Awaiting Review</p>
           </div>
 
@@ -245,7 +245,7 @@ export const AdminOverviewPage: React.FC = () => {
               <span className="text-[11px] font-mono uppercase tracking-wider">Verified</span>
               <UserCheck className="w-3.5 h-3.5" />
             </div>
-            <p className="text-3xl font-serif text-teal-400 font-semibold">{verifiedCount}</p>
+            <p className="text-3xl font-mono text-teal-400 font-bold">{verifiedCount}</p>
             <p className="text-[11px] text-[#A1A1AA] mt-1 font-sans">Community Upvoted</p>
           </div>
 
@@ -255,7 +255,7 @@ export const AdminOverviewPage: React.FC = () => {
               <span className="text-[11px] font-mono uppercase tracking-wider">In Progress</span>
               <ArrowUpRight className="w-3.5 h-3.5" />
             </div>
-            <p className="text-3xl font-serif text-amber-300 font-semibold">{inProgressCount}</p>
+            <p className="text-3xl font-mono text-amber-300 font-bold">{inProgressCount}</p>
             <p className="text-[11px] text-[#A1A1AA] mt-1 font-sans">Active Operations</p>
           </div>
 
@@ -265,7 +265,7 @@ export const AdminOverviewPage: React.FC = () => {
               <span className="text-[11px] font-mono uppercase tracking-wider">Resolved</span>
               <CheckCircle2 className="w-3.5 h-3.5" />
             </div>
-            <p className="text-3xl font-serif text-emerald-400 font-semibold">{resolvedCount}</p>
+            <p className="text-3xl font-mono text-emerald-400 font-bold">{resolvedCount}</p>
             <p className="text-[11px] text-[#A1A1AA] mt-1 font-sans">Verified Fixed</p>
           </div>
 
@@ -275,7 +275,7 @@ export const AdminOverviewPage: React.FC = () => {
               <span className="text-[11px] font-mono uppercase tracking-wider">Rejected</span>
               <XCircle className="w-3.5 h-3.5" />
             </div>
-            <p className="text-3xl font-serif text-[#A1A1AA] font-semibold">{rejectedCount}</p>
+            <p className="text-3xl font-mono text-[#A1A1AA] font-bold">{rejectedCount}</p>
             <p className="text-[11px] text-[#A1A1AA] mt-1 font-sans">Out of Scope</p>
           </div>
         </div>
@@ -355,7 +355,7 @@ export const AdminOverviewPage: React.FC = () => {
           {priorityIncidents.length === 0 ? (
             <div className="p-8 bg-[#222226] border border-[#333338] rounded-sm text-center">
               <CheckCircle2 className="w-8 h-8 text-emerald-400 mx-auto mb-2" />
-              <p className="text-sm font-serif text-[#F4F4F5]">No High-Priority Incidents</p>
+              <p className="text-sm font-mono font-bold text-[#F4F4F5]">No High-Priority Incidents</p>
               <p className="text-xs text-[#A1A1AA] mt-1">
                 All critical civic issues in this sector have been triaged or addressed.
               </p>

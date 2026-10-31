@@ -73,7 +73,7 @@ export default function ResetPasswordPage() {
             <KeyRound className="w-3.5 h-3.5 text-[#D9381E]" />
             <span>Security Protocol • Credential Update</span>
           </div>
-          <h1 className="text-2xl font-serif text-[#1C1917] dark:text-[#F4F4F5] tracking-tight">Set New Password</h1>
+          <h1 className="text-2xl font-mono font-bold text-[#1C1917] dark:text-[#F4F4F5] tracking-tight">Set New Password</h1>
           <p className="text-xs text-[#78716C] dark:text-[#A1A1AA] mt-1 font-sans">
             Choose a secure new password for your NAGARWATCH account
           </p>
@@ -84,7 +84,7 @@ export default function ResetPasswordPage() {
             <div className="w-12 h-12 bg-[#F4F1EA] dark:bg-[#18181B] border border-[#E5E0D4] dark:border-[#333338] text-[#1C1917] dark:text-[#F4F4F5] rounded-xs flex items-center justify-center mx-auto mb-3">
               <CheckCircle2 className="w-6 h-6 text-[#10B981]" />
             </div>
-            <h2 className="text-lg font-serif font-bold text-[#1C1917] dark:text-[#F4F4F5]">Password Changed!</h2>
+            <h2 className="text-lg font-mono font-bold text-[#1C1917] dark:text-[#F4F4F5]">Password Changed!</h2>
             <p className="text-xs text-[#57534E] dark:text-[#A1A1AA] leading-relaxed">
               Your password has been successfully updated. You can now use your new password to sign in.
             </p>

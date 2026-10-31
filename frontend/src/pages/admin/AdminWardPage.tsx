@@ -90,7 +90,7 @@ export const AdminWardPage: React.FC = () => {
     return (
       <div className="p-6 bg-[#222226] border border-[#333338] rounded-sm max-w-xl mx-auto my-12 text-center">
         <AlertTriangle className="w-8 h-8 text-[#F05030] mx-auto mb-3" />
-        <h3 className="text-base font-serif text-[#F4F4F5] mb-1">Ward Data Unavailable</h3>
+        <h3 className="text-base font-mono font-bold text-[#F4F4F5] mb-1">Ward Data Unavailable</h3>
         <p className="text-xs text-[#A1A1AA] mb-4">{error}</p>
         <button
           onClick={fetchWardData}
@@ -117,7 +117,7 @@ export const AdminWardPage: React.FC = () => {
               {isSuper ? 'City-Wide Authority' : `${assignedWardIds.length} Assigned Wards`}
             </span>
           </div>
-          <h1 className="text-2xl sm:text-3xl font-serif text-[#F4F4F5] tracking-tight">
+          <h1 className="text-2xl sm:text-3xl font-mono font-bold text-[#F4F4F5] tracking-tight">
             Assigned Ward Information
           </h1>
           <p className="text-xs text-[#A1A1AA] mt-0.5">
@@ -155,12 +155,12 @@ export const AdminWardPage: React.FC = () => {
             >
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#333338] pb-3">
                 <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-xs bg-[#18181B] border border-[#333338] text-[#F05030] flex items-center justify-center font-serif font-bold text-base">
+                  <div className="w-9 h-9 rounded-xs bg-[#18181B] border border-[#333338] text-[#F05030] flex items-center justify-center font-mono font-bold text-base">
                     {ward.id}
                   </div>
                   <div>
                     <div className="flex items-center gap-2">
-                      <h2 className="text-lg font-serif text-[#F4F4F5] font-semibold">
+                      <h2 className="text-lg font-mono text-[#F4F4F5] font-bold">
                         {ward.name}
                       </h2>
                       <span className="text-[11px] font-mono text-[#F05030] bg-[#F05030]/10 border border-[#F05030]/30 px-1.5 py-0.2 rounded-xs">
@@ -189,7 +189,7 @@ export const AdminWardPage: React.FC = () => {
                   <span className="text-[#71717A] text-[10px] uppercase block">
                     Spatial Classification
                   </span>
-                  <p className="text-sm font-serif text-[#F4F4F5]">{geomType}</p>
+                  <p className="text-sm font-mono font-bold text-[#F4F4F5]">{geomType}</p>
                   <p className="text-[11px] text-[#A1A1AA]">EPSG:4326 PostGIS Polygon</p>
                 </div>
 
@@ -197,7 +197,7 @@ export const AdminWardPage: React.FC = () => {
                   <span className="text-[#71717A] text-[10px] uppercase block">
                     Jurisdiction Authority
                   </span>
-                  <p className="text-sm font-serif text-[#F4F4F5]">Municipal Corporation</p>
+                  <p className="text-sm font-mono font-bold text-[#F4F4F5]">Municipal Corporation</p>
                   <p className="text-[11px] text-[#A1A1AA]">Triage & Field Maintenance</p>
                 </div>
 
@@ -205,7 +205,7 @@ export const AdminWardPage: React.FC = () => {
                   <span className="text-[#71717A] text-[10px] uppercase block">
                     Active Telemetry
                   </span>
-                  <p className="text-sm font-serif text-[#F4F4F5]">
+                  <p className="text-sm font-mono font-bold text-[#F4F4F5]">
                     {wardSpecificIncidents.filter((i) => i.status !== 'resolved').length} Unresolved
                   </p>
                   <p className="text-[11px] text-[#A1A1AA]">

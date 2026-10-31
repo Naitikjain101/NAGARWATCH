@@ -267,7 +267,7 @@ export default function LoginPage() {
               <KeyRound className="w-3.5 h-3.5 text-[#D9381E]" />
               <span>Security Protocol • Identity Recovery</span>
             </div>
-            <h1 className="text-2xl font-serif text-[#1C1917] dark:text-[#F4F4F5] tracking-tight">Reset Password</h1>
+            <h1 className="text-2xl font-mono font-bold text-[#1C1917] dark:text-[#F4F4F5] tracking-tight">Reset Password</h1>
             <p className="text-xs text-[#78716C] dark:text-[#A1A1AA] mt-1 font-sans">
               Enter your email to receive a password recovery link
             </p>
@@ -367,7 +367,7 @@ export default function LoginPage() {
                 </div>
                 <span className="text-[10px] font-mono text-[#78716C] dark:text-[#A1A1AA]">AUTH-PORTAL v2.6</span>
               </div>
-              <h1 className="text-3xl font-serif text-[#1C1917] dark:text-[#F4F4F5] tracking-tight">Sign In</h1>
+              <h1 className="text-3xl font-mono font-bold text-[#1C1917] dark:text-[#F4F4F5] tracking-tight">Sign In</h1>
               <p className="text-xs text-[#78716C] dark:text-[#A1A1AA] mt-1 font-sans">
                 Sign in to continue reporting and access your NAGARWATCH portal
               </p>
@@ -531,7 +531,7 @@ export default function LoginPage() {
                 <span>•</span>
                 <span className="text-[#D9381E]">Live System</span>
               </div>
-              <h2 className="text-xl font-serif tracking-tight text-[#FBF9F4]">
+              <h2 className="text-xl font-mono font-bold tracking-tight text-[#FBF9F4]">
                 Municipal Intelligence & Incident Dispatch Network
               </h2>
             </div>

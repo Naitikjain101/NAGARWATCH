@@ -152,10 +152,11 @@ export const DESIGN_TOKENS = {
     },
   },
   typography: {
-    serifFont: "'Instrument Serif', Georgia, serif",
-    headingFont: "'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
-    bodyFont: "'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
-    monoFont: "'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace",
+    primaryFont: "'Space Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace",
+    serifFont: "'Space Mono', ui-monospace, monospace",
+    headingFont: "'Space Mono', ui-monospace, monospace",
+    bodyFont: "'Space Mono', ui-monospace, monospace",
+    monoFont: "'Space Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace",
   },
   breakpoints: {
     mobileSmall: 320,

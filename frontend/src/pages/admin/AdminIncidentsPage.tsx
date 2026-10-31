@@ -321,7 +321,7 @@ export const AdminIncidentsPage: React.FC = () => {
     return (
       <div className="p-6 bg-[#222226] border border-[#333338] rounded-sm max-w-xl mx-auto my-12 text-center">
         <AlertTriangle className="w-8 h-8 text-[#F05030] mx-auto mb-3" />
-        <h3 className="text-base font-serif text-[#F4F4F5] mb-1">Queue Connection Error</h3>
+        <h3 className="text-base font-mono font-bold text-[#F4F4F5] mb-1">Queue Connection Error</h3>
         <p className="text-xs text-[#A1A1AA] mb-4">{error}</p>
         <button
           onClick={fetchIncidents}
@@ -348,7 +348,7 @@ export const AdminIncidentsPage: React.FC = () => {
               {filteredIncidents.length} of {incidents.length} records active
             </span>
           </div>
-          <h1 className="text-2xl sm:text-3xl font-serif text-[#F4F4F5] tracking-tight">
+          <h1 className="text-2xl sm:text-3xl font-mono font-bold text-[#F4F4F5] tracking-tight">
             Incident Management
           </h1>
           <p className="text-xs text-[#A1A1AA] mt-0.5">
@@ -491,7 +491,7 @@ export const AdminIncidentsPage: React.FC = () => {
           {filteredIncidents.length === 0 ? (
             <div className="p-12 bg-[#222226] border border-[#333338] rounded-sm text-center">
               <Search className="w-8 h-8 text-[#A1A1AA] mx-auto mb-2" />
-              <p className="text-sm font-serif text-[#F4F4F5]">No Matching Incidents Found</p>
+              <p className="text-sm font-mono font-bold text-[#F4F4F5]">No Matching Incidents Found</p>
               <p className="text-xs text-[#A1A1AA] mt-1 mb-4">
                 Try adjusting your filter criteria or search keyword to view records.
               </p>
@@ -747,7 +747,7 @@ export const AdminIncidentsPage: React.FC = () => {
                 <span className="text-[10px] font-mono uppercase tracking-widest text-[#F05030]">
                   Official Lifecycle Transition
                 </span>
-                <h3 className="text-base font-serif text-[#F4F4F5]">
+                <h3 className="text-base font-mono font-bold text-[#F4F4F5]">
                   Update Incident #{statusModalIncident.id}
                 </h3>
               </div>

@@ -3,11 +3,12 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  /* ─── Typography Families ────────────────────────────────────────────────── */
-  --font-serif: 'Instrument Serif', Georgia, Cambria, 'Times New Roman', serif;
-  --font-heading: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  /* ─── Typography Families: Centralized Space Mono Technical System ──────── */
+  --font-primary: 'Space Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --font-mono: 'Space Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --font-sans: 'Space Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --font-heading: 'Space Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --font-serif: 'Space Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
   /* ─── Visual Design System: Warm Paper Palette (Citizen Portal) ──────────── */
   --color-nw-paper-base: #F4F1EA;
@@ -94,6 +95,10 @@
 }
 
 :root {
+  /* Centralized Global Typography System */
+  --font-family-primary: 'Space Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-family: var(--font-family-primary);
+
   /* Dynamic CSS Custom Properties - Default Light Mode */
   --nw-bg: #F4F1EA;
   --nw-surface: #FBF9F4;
@@ -144,99 +149,120 @@
   --nw-status-urgent: #EF4444;
 }
 
-/* ─── Typography Utilities ──────────────────────────────────────────────────── */
+/* ─── Centralized Typography Utilities ─────────────────────────────────────── */
+@utility font-primary {
+  font-family: var(--font-primary);
+}
+
 @utility font-serif {
-  font-family: var(--font-serif);
+  font-family: var(--font-primary);
 }
 
 @utility font-masthead {
-  font-family: var(--font-serif);
+  font-family: var(--font-primary);
   letter-spacing: -0.02em;
 }
 
 @utility font-heading {
-  font-family: var(--font-heading);
+  font-family: var(--font-primary);
 }
 
 @utility font-sans {
-  font-family: var(--font-sans);
+  font-family: var(--font-primary);
+}
+
+@utility font-mono {
+  font-family: var(--font-primary);
 }
 
 @utility text-display {
-  font-family: var(--font-serif);
+  font-family: var(--font-primary);
   font-size: 2.75rem;
-  line-height: 1.1;
-  font-weight: 400;
+  line-height: 1.15;
+  font-weight: 700;
   letter-spacing: -0.025em;
 }
 
 @utility text-h1 {
-  font-family: var(--font-serif);
+  font-family: var(--font-primary);
   font-size: 2rem;
-  line-height: 1.2;
-  font-weight: 400;
+  line-height: 1.25;
+  font-weight: 700;
   letter-spacing: -0.02em;
 }
 
 @utility text-h2 {
-  font-family: var(--font-heading);
+  font-family: var(--font-primary);
   font-size: 1.25rem;
   line-height: 1.625rem;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: -0.015em;
 }
 
 @utility text-h3 {
-  font-family: var(--font-heading);
+  font-family: var(--font-primary);
   font-size: 1.0625rem;
   line-height: 1.5rem;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: -0.01em;
 }
 
 @utility text-body {
-  font-family: var(--font-sans);
+  font-family: var(--font-primary);
   font-size: 0.875rem;
-  line-height: 1.35rem;
+  line-height: 1.45rem;
   font-weight: 400;
 }
 
 @utility text-body-medium {
-  font-family: var(--font-sans);
+  font-family: var(--font-primary);
   font-size: 0.875rem;
-  line-height: 1.35rem;
-  font-weight: 500;
+  line-height: 1.45rem;
+  font-weight: 700;
 }
 
 @utility text-caption {
-  font-family: var(--font-sans);
+  font-family: var(--font-primary);
   font-size: 0.75rem;
-  line-height: 1rem;
-  font-weight: 500;
+  line-height: 1.1rem;
+  font-weight: 400;
 }
 
 @utility text-overline {
-  font-family: var(--font-sans);
+  font-family: var(--font-primary);
   font-size: 0.6875rem;
   line-height: 0.875rem;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
 
 @utility font-mono-id {
-  font-family: var(--font-mono);
+  font-family: var(--font-primary);
   font-variant-numeric: tabular-nums;
 }
 
 /* ─── Base Styles ───────────────────────────────────────────────────────────── */
 @layer base {
-  body {
+  *, ::before, ::after {
+    box-sizing: border-box;
+  }
+
+  html, body {
     background-color: var(--nw-bg);
     color: var(--nw-text-primary);
-    font-family: var(--font-sans);
+    font-family: var(--font-primary);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-primary);
+    letter-spacing: -0.02em;
+  }
+
+  button, input, optgroup, select, textarea {
+    font-family: inherit;
   }
 }
 

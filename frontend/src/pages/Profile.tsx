@@ -288,7 +288,7 @@ export default function ProfilePage() {
               <UserCheck className="w-3.5 h-3.5 text-[#D9381E] dark:text-[#F05030]" />
               <span>Civic Identity Dossier</span>
             </div>
-            <h1 className="text-3xl font-serif text-[#1C1917] dark:text-[#F4F4F5] tracking-tight">My Profile</h1>
+            <h1 className="text-3xl font-mono font-bold text-[#1C1917] dark:text-[#F4F4F5] tracking-tight">My Profile</h1>
             <p className="text-xs text-[#78716C] dark:text-[#A1A1AA] mt-1 font-sans">
               View and manage your verified account identity, contact details, and municipal jurisdiction.
             </p>
@@ -354,7 +354,7 @@ export default function ProfilePage() {
           <div className="p-6 border-b border-[#E5E0D4] dark:border-[#333338] flex flex-col sm:flex-row sm:items-center justify-between gap-5 bg-white dark:bg-[#1C1C20]">
             <div className="flex items-center gap-4">
               <div className="relative">
-                <div className="w-16 h-16 rounded-xs bg-[#F4F1EA] dark:bg-[#2B2B30] border border-[#E5E0D4] dark:border-[#333338] text-[#1C1917] dark:text-[#F4F4F5] flex items-center justify-center font-serif text-2xl font-bold overflow-hidden shadow-2xs">
+                <div className="w-16 h-16 rounded-xs bg-[#F4F1EA] dark:bg-[#2B2B30] border border-[#E5E0D4] dark:border-[#333338] text-[#1C1917] dark:text-[#F4F4F5] flex items-center justify-center font-mono text-2xl font-bold overflow-hidden shadow-2xs">
                   {displayAvatar ? (
                     <img src={displayAvatar} alt={displayName} className="w-full h-full object-cover" />
                   ) : (
@@ -380,7 +380,7 @@ export default function ProfilePage() {
 
               <div className="space-y-1">
                 <div className="flex items-center gap-2.5 flex-wrap">
-                  <h2 className="text-xl font-serif font-bold text-[#1C1917] dark:text-[#F4F4F5]">{displayName}</h2>
+                  <h2 className="text-xl font-mono font-bold text-[#1C1917] dark:text-[#F4F4F5]">{displayName}</h2>
                   {profile?.is_verified && (
                     <span className="inline-flex items-center gap-1 text-[11px] font-mono px-2 py-0.5 rounded-xs bg-[#F4F1EA] dark:bg-[#2B2B30] text-[#1C1917] dark:text-[#F4F4F5] border border-[#D5CEBF] dark:border-[#333338]">
                       <ShieldCheck className="w-3 h-3 text-[#1C1917] dark:text-[#F4F4F5]" />

@@ -15,10 +15,10 @@ export default function NotFoundPage() {
 
         {/* Large 404 Masthead */}
         <div className="space-y-2">
-          <h1 className="text-6xl sm:text-7xl font-serif font-bold tracking-tight text-[#1C1917] dark:text-[#F4F4F5] leading-none">
+          <h1 className="text-6xl sm:text-7xl font-mono font-bold tracking-tight text-[#1C1917] dark:text-[#F4F4F5] leading-none">
             404
           </h1>
-          <h2 className="text-xl sm:text-2xl font-serif font-bold text-[#1C1917] dark:text-[#F4F4F5]">
+          <h2 className="text-xl sm:text-2xl font-mono font-bold text-[#1C1917] dark:text-[#F4F4F5]">
             Sector Not Found
           </h2>
           <p className="text-xs sm:text-sm text-[#78716C] dark:text-[#A1A1AA] leading-relaxed max-w-sm mx-auto">

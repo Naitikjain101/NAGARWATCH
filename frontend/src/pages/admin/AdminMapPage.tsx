@@ -124,7 +124,7 @@ export const AdminMapPage: React.FC = () => {
     return (
       <div className="p-6 bg-[#222226] border border-[#333338] rounded-sm max-w-xl mx-auto my-12 text-center">
         <AlertTriangle className="w-8 h-8 text-[#F05030] mx-auto mb-3" />
-        <h3 className="text-base font-serif text-[#F4F4F5] mb-1">Spatial Engine Offline</h3>
+        <h3 className="text-base font-mono font-bold text-[#F4F4F5] mb-1">Spatial Engine Offline</h3>
         <p className="text-xs text-[#A1A1AA] mb-4">{error}</p>
         <button
           onClick={fetchMapData}

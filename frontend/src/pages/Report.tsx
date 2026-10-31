@@ -405,7 +405,7 @@ export default function ReportPage() {
             <span className="text-[10px] font-mono uppercase tracking-widest text-[#D9381E] dark:text-[#F05030] font-semibold bg-[#D9381E]/10 dark:bg-[#F05030]/20 border border-[#D9381E]/20 dark:border-[#F05030]/30 px-2 py-0.5 rounded-xs inline-block">
               Authoritative Municipal Filing
             </span>
-            <h1 className="text-2xl sm:text-3xl font-serif text-[#1C1917] dark:text-[#F4F4F5] tracking-tight">
+            <h1 className="text-2xl sm:text-3xl font-mono font-bold text-[#1C1917] dark:text-[#F4F4F5] tracking-tight">
               Report Submitted Successfully
             </h1>
             <p className="text-xs sm:text-sm text-[#78716C] dark:text-[#A1A1AA] max-w-md mx-auto leading-relaxed">
@@ -531,7 +531,7 @@ export default function ReportPage() {
               Draft Auto-Saved
             </span>
           </div>
-          <h1 className="text-3xl sm:text-4xl font-serif text-[#1C1917] dark:text-[#F4F4F5] tracking-tight">
+          <h1 className="text-3xl sm:text-4xl font-mono font-bold text-[#1C1917] dark:text-[#F4F4F5] tracking-tight">
             Report a Civic Hazard
           </h1>
           <p className="text-xs sm:text-sm text-[#78716C] dark:text-[#A1A1AA] mt-1 max-w-2xl leading-relaxed">
@@ -560,7 +560,7 @@ export default function ReportPage() {
                     01
                   </span>
                   <div>
-                    <h2 className="text-base font-serif font-bold text-[#1C1917] dark:text-[#F4F4F5]">
+                    <h2 className="text-base font-mono font-bold text-[#1C1917] dark:text-[#F4F4F5]">
                       Incident Location & Sector
                     </h2>
                     <p className="text-[11px] text-[#78716C] dark:text-[#A1A1AA]">
@@ -611,7 +611,7 @@ export default function ReportPage() {
                     02
                   </span>
                   <div>
-                    <h2 className="text-base font-serif font-bold text-[#1C1917] dark:text-[#F4F4F5]">
+                    <h2 className="text-base font-mono font-bold text-[#1C1917] dark:text-[#F4F4F5]">
                       Defect Classification & Urgency
                     </h2>
                     <p className="text-[11px] text-[#78716C] dark:text-[#A1A1AA]">
@@ -731,7 +731,7 @@ export default function ReportPage() {
                     03
                   </span>
                   <div>
-                    <h2 className="text-base font-serif font-bold text-[#1C1917] dark:text-[#F4F4F5]">
+                    <h2 className="text-base font-mono font-bold text-[#1C1917] dark:text-[#F4F4F5]">
                       Photographic Evidence
                     </h2>
                     <p className="text-[11px] text-[#78716C] dark:text-[#A1A1AA]">
@@ -886,7 +886,7 @@ export default function ReportPage() {
                     04
                   </span>
                   <div>
-                    <h2 className="text-base font-serif font-bold text-[#1C1917] dark:text-[#F4F4F5]">
+                    <h2 className="text-base font-mono font-bold text-[#1C1917] dark:text-[#F4F4F5]">
                       Review & Municipal Dispatch
                     </h2>
                     <p className="text-[11px] text-[#78716C] dark:text-[#A1A1AA]">

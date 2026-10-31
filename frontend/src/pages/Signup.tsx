@@ -206,7 +206,7 @@ export default function SignupPage() {
             <div className="text-[10px] font-mono uppercase tracking-widest text-[#78716C] dark:text-[#A1A1AA] mb-1">
               Dispatch Confirmation
             </div>
-            <h1 className="text-2xl font-serif text-[#1C1917] dark:text-[#F4F4F5] tracking-tight">Check Your Email</h1>
+            <h1 className="text-2xl font-mono font-bold text-[#1C1917] dark:text-[#F4F4F5] tracking-tight">Check Your Email</h1>
           </div>
 
           <p className="text-xs text-[#57534E] dark:text-[#A1A1AA] mb-6 leading-relaxed">
@@ -273,7 +273,7 @@ export default function SignupPage() {
                 </div>
                 <span className="text-[10px] font-mono text-[#78716C] dark:text-[#A1A1AA]">REGISTER v2.6</span>
               </div>
-              <h1 className="text-3xl font-serif text-[#1C1917] dark:text-[#F4F4F5] tracking-tight">Create Account</h1>
+              <h1 className="text-3xl font-mono font-bold text-[#1C1917] dark:text-[#F4F4F5] tracking-tight">Create Account</h1>
               <p className="text-xs text-[#78716C] dark:text-[#A1A1AA] mt-1 font-sans">
                 Join NAGARWATCH to report and resolve neighbourhood issues
               </p>
@@ -492,7 +492,7 @@ export default function SignupPage() {
                 <span>•</span>
                 <span className="text-[#D9381E]">Section 4(A)</span>
               </div>
-              <h2 className="text-xl font-serif tracking-tight text-[#FBF9F4]">
+              <h2 className="text-xl font-mono font-bold tracking-tight text-[#FBF9F4]">
                 Citizen Participation & Governance Protocol
               </h2>
             </div>

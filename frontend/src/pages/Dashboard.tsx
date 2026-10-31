@@ -336,7 +336,7 @@ export default function DashboardPage() {
               Municipal Lifecycle Tracking
             </span>
           </div>
-          <h1 className="text-3xl sm:text-4xl font-serif text-[#1C1917] dark:text-[#F4F4F5] tracking-tight">
+          <h1 className="text-3xl sm:text-4xl font-mono font-bold text-[#1C1917] dark:text-[#F4F4F5] tracking-tight">
             My Reports
           </h1>
           <p className="text-xs sm:text-sm text-[#78716C] dark:text-[#A1A1AA] mt-1 max-w-2xl leading-relaxed">
@@ -390,7 +390,7 @@ export default function DashboardPage() {
           <div className="flex items-center justify-between pb-2 border-b border-[#E5E0D4] dark:border-[#333338]">
             <div className="flex items-center gap-2">
               <Bell className="w-4 h-4 text-[#D9381E] dark:text-[#F05030]" />
-              <h3 className="font-serif font-bold text-base text-[#1C1917] dark:text-[#F4F4F5]">
+              <h3 className="font-mono font-bold text-base text-[#1C1917] dark:text-[#F4F4F5]">
                 Personal Incident Notifications
               </h3>
               {unreadNotifsCount > 0 && (
@@ -466,7 +466,7 @@ export default function DashboardPage() {
               <FileText className="w-3.5 h-3.5 text-[#4682B4]" />
               Total Reports
             </span>
-            <p className="text-2xl font-serif font-bold text-[#1C1917] dark:text-[#F4F4F5]">{metrics.total}</p>
+            <p className="text-2xl font-mono font-bold text-[#1C1917] dark:text-[#F4F4F5]">{metrics.total}</p>
           </div>
 
           <div className="p-3.5 sm:p-4 rounded-sm bg-[#FBF9F4] dark:bg-[#222226] border border-[#E5E0D4] dark:border-[#333338] shadow-xs space-y-1">
@@ -474,7 +474,7 @@ export default function DashboardPage() {
               <Activity className="w-3.5 h-3.5 text-[#D97706]" />
               Active Triage
             </span>
-            <p className="text-2xl font-serif font-bold text-[#D97706]">{metrics.active}</p>
+            <p className="text-2xl font-mono font-bold text-[#D97706]">{metrics.active}</p>
           </div>
 
           <div className="p-3.5 sm:p-4 rounded-sm bg-[#FBF9F4] dark:bg-[#222226] border border-[#E5E0D4] dark:border-[#333338] shadow-xs space-y-1">
@@ -482,7 +482,7 @@ export default function DashboardPage() {
               <CheckCircle className="w-3.5 h-3.5 text-[#16A34A]" />
               Resolved
             </span>
-            <p className="text-2xl font-serif font-bold text-[#16A34A]">{metrics.resolved}</p>
+            <p className="text-2xl font-mono font-bold text-[#16A34A]">{metrics.resolved}</p>
           </div>
 
           <div className="p-3.5 sm:p-4 rounded-sm bg-[#FBF9F4] dark:bg-[#222226] border border-[#E5E0D4] dark:border-[#333338] shadow-xs space-y-1">
@@ -490,7 +490,7 @@ export default function DashboardPage() {
               <ThumbsUp className="w-3.5 h-3.5 text-[#0D9488]" />
               Endorsements
             </span>
-            <p className="text-2xl font-serif font-bold text-[#0D9488]">{metrics.totalConfirmations}</p>
+            <p className="text-2xl font-mono font-bold text-[#0D9488]">{metrics.totalConfirmations}</p>
           </div>
         </div>
       )}
@@ -621,7 +621,7 @@ export default function DashboardPage() {
       ) : error ? (
         <div className="p-8 bg-[#FBF9F4] border border-[#E5E0D4] rounded-sm text-center max-w-md mx-auto space-y-3 font-sans">
           <AlertTriangle className="w-8 h-8 text-[#D9381E] mx-auto" />
-          <h3 className="font-serif font-bold text-lg text-[#1C1917]">Could Not Load Reports</h3>
+          <h3 className="font-mono font-bold text-lg text-[#1C1917]">Could Not Load Reports</h3>
           <p className="text-xs text-[#78716C] leading-relaxed">{error}</p>
           <button
             type="button"
@@ -638,7 +638,7 @@ export default function DashboardPage() {
             <FileText className="w-6 h-6" />
           </div>
           <div className="space-y-1">
-            <h3 className="font-serif font-bold text-xl text-[#1C1917]">No reports submitted yet</h3>
+            <h3 className="font-mono font-bold text-xl text-[#1C1917]">No reports submitted yet</h3>
             <p className="text-xs text-[#78716C] leading-relaxed max-w-sm mx-auto">
               You haven't reported any civic incidents. When you snap and submit a photo, your reports and their live fix status will appear here.
             </p>
@@ -656,7 +656,7 @@ export default function DashboardPage() {
       ) : filteredReports.length === 0 ? (
         <div className="py-14 px-6 bg-[#FBF9F4] rounded-sm border border-[#E5E0D4] text-center max-w-md mx-auto space-y-3 font-sans">
           <Search className="w-7 h-7 text-[#78716C] mx-auto" />
-          <h3 className="font-serif font-bold text-base text-[#1C1917]">No reports match your filters</h3>
+          <h3 className="font-mono font-bold text-base text-[#1C1917]">No reports match your filters</h3>
           <p className="text-xs text-[#78716C]">No incidents match the active search and filter criteria.</p>
           <button
             type="button"
@@ -709,7 +709,7 @@ export default function DashboardPage() {
                         {/* Header Line: Category, #id copy button, Severity, Status Badge */}
                         <div className="flex flex-wrap items-center justify-between gap-2 mb-1.5">
                           <div className="flex items-center gap-2 flex-wrap">
-                            <h3 className="text-base font-serif font-bold text-[#1C1917] dark:text-[#F4F4F5]">
+                            <h3 className="text-base font-mono font-bold text-[#1C1917] dark:text-[#F4F4F5]">
                               {report.category}
                             </h3>
 

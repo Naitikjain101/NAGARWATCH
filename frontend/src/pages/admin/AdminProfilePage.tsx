@@ -86,7 +86,7 @@ export const AdminProfilePage: React.FC = () => {
             <span className="text-[11px] text-[#A1A1AA] font-mono">•</span>
             <span className="text-[11px] text-[#A1A1AA] font-mono">Verified Session</span>
           </div>
-          <h1 className="text-2xl sm:text-3xl font-serif text-[#F4F4F5] tracking-tight">
+          <h1 className="text-2xl sm:text-3xl font-mono font-bold text-[#F4F4F5] tracking-tight">
             Administrator Account Profile
           </h1>
           <p className="text-xs text-[#A1A1AA] mt-0.5">
@@ -107,12 +107,12 @@ export const AdminProfilePage: React.FC = () => {
       <div className="p-6 bg-[#222226] border border-[#333338] rounded-sm shadow-sm space-y-6">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-6 border-b border-[#333338]">
           <div className="flex items-center gap-4">
-            <div className="w-14 h-14 rounded-xs bg-[#18181B] border border-[#333338] text-[#F05030] flex items-center justify-center font-serif text-2xl font-bold shadow-xs">
+            <div className="w-14 h-14 rounded-xs bg-[#18181B] border border-[#333338] text-[#F05030] flex items-center justify-center font-mono text-2xl font-bold shadow-xs">
               {displayName.slice(0, 1).toUpperCase()}
             </div>
             <div>
               <div className="flex items-center gap-2.5">
-                <h2 className="text-xl font-serif text-[#F4F4F5] font-semibold">{displayName}</h2>
+                <h2 className="text-xl font-mono text-[#F4F4F5] font-bold">{displayName}</h2>
                 <span className="text-xs font-mono uppercase bg-[#F05030]/20 text-[#F05030] border border-[#F05030]/30 px-2 py-0.5 rounded-xs font-bold">
                   {userRole === 'super_admin' ? 'Super Administrator' : 'Ward Administrator'}
                 </span>
