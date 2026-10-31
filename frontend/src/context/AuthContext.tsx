@@ -99,6 +99,31 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         setRoleError(`Server returned status ${res.status}. Could not verify permissions.`);
         return null;
       } catch {
+        // Authoritative Fallback: If backend is waking up or temporarily unreachable,
+        // retrieve the verified role directly from the Supabase public.profiles database table via RLS
+        try {
+          const { data: { user: currentUser } } = await supabase.auth.getUser();
+          if (currentUser?.id) {
+            const { data: profile } = await supabase
+              .from('profiles')
+              .select('role')
+              .eq('id', currentUser.id)
+              .maybeSingle();
+
+            if (profile?.role) {
+              const role = profile.role as string;
+              const resolvedRole: AppRole =
+                role === 'super_admin' || role === 'admin' ? role : 'citizen';
+              setUserRole(resolvedRole);
+              lastFetchedTokenRef.current = token;
+              setRoleError(null);
+              return resolvedRole;
+            }
+          }
+        } catch {
+          // Both paths failed
+        }
+
         setUserRole(null);
         setRoleError('Could not connect to authentication server. Please check your connection.');
         return null;

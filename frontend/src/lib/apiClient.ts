@@ -23,26 +23,37 @@ import { normalizeApiBaseUrl } from './urlUtils';
 // ─── Normalized API Base URL ──────────────────────────────────────────────────
 /**
  * Resolves the API Base URL.
- * If running on a network device (e.g. phone/tablet at http://172.20.11.40:3000),
- * automatically rewrites 'localhost' or '127.0.0.1' in the configured API URL to match
- * the browser's current host (window.location.hostname), ensuring requests
- * reach the Flask backend over the LAN without requiring hardcoded IP changes.
+ * - On local dev network devices (e.g. phone/tablet on LAN like 172.20.11.40:3000),
+ *   rewrites 'localhost' to match the LAN IP so requests reach the local Flask backend.
+ * - On production web deployments (e.g. Vercel *.vercel.app or custom domains),
+ *   avoids rewriting localhost to public domains (which caused mixed-content/ERR_NETWORK).
+ *   Falls back cleanly to relative '' or the configured remote URL.
  */
 export function resolveApiBaseUrl(rawUrl?: string): string {
   const normalized = normalizeApiBaseUrl(rawUrl);
   if (!normalized) return '';
 
-  if (
-    typeof window !== 'undefined' &&
-    window.location.hostname &&
-    window.location.hostname !== 'localhost' &&
-    window.location.hostname !== '127.0.0.1'
-  ) {
+  if (typeof window !== 'undefined' && window.location.hostname) {
+    const host = window.location.hostname;
+    // Check if current device is on private LAN IPv4 space (RFC 1918)
+    const isLanIp = /^(192\.168\.|10\.|172\.(1[6-9]|2[0-9]|3[0-1])\.)/.test(host);
+
     try {
       const parsed = new URL(normalized);
-      if (parsed.hostname === 'localhost' || parsed.hostname === '127.0.0.1') {
-        parsed.hostname = window.location.hostname;
+      // Only rewrite localhost/127.0.0.1 if user is accessing on local LAN device
+      if ((parsed.hostname === 'localhost' || parsed.hostname === '127.0.0.1') && isLanIp) {
+        parsed.hostname = host;
         return parsed.origin;
+      }
+
+      // If running on public HTTPS deployment (e.g. Vercel) and rawUrl points to localhost,
+      // fallback to empty relative base so requests go through proxy/rewrites rather than failing mixed-content
+      if (
+        (parsed.hostname === 'localhost' || parsed.hostname === '127.0.0.1') &&
+        window.location.protocol === 'https:' &&
+        !isLanIp
+      ) {
+        return '';
       }
     } catch {
       // Fallback to normalized
@@ -81,7 +92,7 @@ async function refreshAccessToken(): Promise<string | null> {
 
 const apiClient: AxiosInstance = axios.create({
   baseURL: API_BASE_URL,
-  timeout: 30_000,
+  timeout: 60_000, // 60s timeout accommodates Render backend cold-start spin-up
   headers: { 'Content-Type': 'application/json' },
 });
 

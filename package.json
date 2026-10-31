@@ -14,3 +14,4 @@
     "test:backend": "cd backend && (venv/bin/pytest 2>/dev/null || pytest)"
   }
 }
+

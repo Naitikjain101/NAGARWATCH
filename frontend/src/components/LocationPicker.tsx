@@ -82,12 +82,12 @@ export function LocationPicker({ location, onChange, hasExif }: LocationPickerPr
   return (
     <div className="space-y-3 font-sans">
       <div className="flex items-center justify-between">
-        <label className="block text-xs font-mono uppercase tracking-wider text-[#78716C] font-semibold">
+        <label className="block text-xs font-mono uppercase tracking-wider text-[#78716C] dark:text-[#A1A1AA] font-semibold">
           Incident Location
         </label>
         {location && (
-          <span className="text-[11px] font-mono px-2 py-0.5 rounded-xs font-medium inline-flex items-center gap-1 bg-[#F4F1EA] text-[#1C1917] border border-[#E5E0D4]">
-            <CheckCircle2 className="w-3 h-3 text-[#D9381E]" />
+          <span className="text-[11px] font-mono px-2 py-0.5 rounded-xs font-medium inline-flex items-center gap-1 bg-[#F4F1EA] dark:bg-[#18181B] text-[#1C1917] dark:text-[#F4F4F5] border border-[#E5E0D4] dark:border-[#333338]">
+            <CheckCircle2 className="w-3 h-3 text-[#D9381E] dark:text-[#F05030]" />
             {location.source === 'exif' && 'From Photo EXIF'}
             {location.source === 'browser' && 'From Device GPS'}
             {location.source === 'map' && 'Selected on Map'}
@@ -97,16 +97,16 @@ export function LocationPicker({ location, onChange, hasExif }: LocationPickerPr
 
       {/* Location Status Card */}
       {location ? (
-        <div className="bg-[#FBF9F4] border border-[#E5E0D4] rounded-sm p-3.5 flex items-center justify-between">
+        <div className="bg-[#FBF9F4] dark:bg-[#222226] border border-[#E5E0D4] dark:border-[#333338] rounded-sm p-3.5 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-sm bg-[#D9381E]/10 text-[#D9381E] border border-[#D9381E]/20 flex items-center justify-center shrink-0">
+            <div className="w-9 h-9 rounded-sm bg-[#D9381E]/10 dark:bg-[#F05030]/20 text-[#D9381E] dark:text-[#F05030] border border-[#D9381E]/20 dark:border-[#F05030]/30 flex items-center justify-center shrink-0">
               <MapPin className="w-4 h-4" />
             </div>
             <div>
-              <p className="text-[10px] font-mono uppercase tracking-wider text-[#78716C]">
+              <p className="text-[10px] font-mono uppercase tracking-wider text-[#78716C] dark:text-[#A1A1AA]">
                 Coordinates
               </p>
-              <p className="text-xs sm:text-sm font-mono font-semibold text-[#1C1917] tracking-tight">
+              <p className="text-xs sm:text-sm font-mono font-semibold text-[#1C1917] dark:text-[#F4F4F5] tracking-tight">
                 {location.lat.toFixed(5)}°, {location.lon.toFixed(5)}°
               </p>
             </div>
@@ -114,17 +114,17 @@ export function LocationPicker({ location, onChange, hasExif }: LocationPickerPr
           <button
             type="button"
             onClick={() => setShowMap(!showMap)}
-            className="text-xs text-[#D9381E] hover:text-[#B92B15] font-mono font-medium underline underline-offset-2 transition-colors"
+            className="text-xs text-[#D9381E] dark:text-[#F05030] hover:underline font-mono font-medium underline-offset-2 transition-colors cursor-pointer"
           >
             {showMap ? 'Hide Map' : 'Adjust on Map'}
           </button>
         </div>
       ) : (
-        <div className="bg-[#FBF9F4] border border-[#E5E0D4] rounded-sm p-4">
+        <div className="bg-[#FBF9F4] dark:bg-[#222226] border border-[#E5E0D4] dark:border-[#333338] rounded-sm p-4">
           <div className="flex items-start gap-3">
-            <AlertTriangle className="w-4 h-4 text-[#D9381E] shrink-0 mt-0.5" />
-            <div className="text-xs text-[#57534E]">
-              <p className="font-semibold text-[#1C1917] mb-0.5">
+            <AlertTriangle className="w-4 h-4 text-[#D9381E] dark:text-[#F05030] shrink-0 mt-0.5" />
+            <div className="text-xs text-[#57534E] dark:text-[#A1A1AA]">
+              <p className="font-semibold text-[#1C1917] dark:text-[#F4F4F5] mb-0.5">
                 {hasExif ? 'Extracting photo location...' : 'Location required for municipal routing'}
               </p>
               <p className="text-[11px] leading-relaxed">
@@ -138,19 +138,19 @@ export function LocationPicker({ location, onChange, hasExif }: LocationPickerPr
               type="button"
               disabled={gpsLoading}
               onClick={handleBrowserGps}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#F4F1EA] hover:bg-[#EAE5D9] text-[#1C1917] border border-[#E5E0D4] rounded-sm text-xs font-mono font-medium transition-colors disabled:opacity-50"
+              className="inline-flex items-center gap-1.5 px-3 py-2 bg-[#F4F1EA] dark:bg-[#18181B] hover:bg-[#EAE5D9] dark:hover:bg-[#2B2B30] text-[#1C1917] dark:text-[#F4F4F5] border border-[#E5E0D4] dark:border-[#333338] rounded-sm text-xs font-mono font-medium transition-colors disabled:opacity-50 cursor-pointer min-h-[44px]"
             >
               {gpsLoading ? (
-                <Loader2 className="w-3.5 h-3.5 animate-spin text-[#D9381E]" />
+                <Loader2 className="w-3.5 h-3.5 animate-spin text-[#D9381E] dark:text-[#F05030]" />
               ) : (
-                <Navigation className="w-3.5 h-3.5 text-[#D9381E]" />
+                <Navigation className="w-3.5 h-3.5 text-[#D9381E] dark:text-[#F05030]" />
               )}
               <span>Use Device Location</span>
             </button>
             <button
               type="button"
               onClick={() => setShowMap(true)}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#D9381E] hover:bg-[#B92B15] text-white rounded-sm text-xs font-mono font-medium transition-colors"
+              className="inline-flex items-center gap-1.5 px-3 py-2 bg-[#D9381E] hover:bg-[#B92B15] dark:bg-[#F05030] dark:hover:bg-[#D9381E] text-white rounded-sm text-xs font-mono font-medium transition-colors cursor-pointer min-h-[44px]"
             >
               <MapPin className="w-3.5 h-3.5" />
               <span>Pin on Map</span>
@@ -160,7 +160,7 @@ export function LocationPicker({ location, onChange, hasExif }: LocationPickerPr
       )}
 
       {gpsError && (
-        <p className="text-xs text-[#991B1B] font-mono flex items-center gap-1">
+        <p className="text-xs text-[#991B1B] dark:text-red-400 font-mono flex items-center gap-1">
           <AlertTriangle className="w-3.5 h-3.5 shrink-0" />
           {gpsError}
         </p>
@@ -168,13 +168,13 @@ export function LocationPicker({ location, onChange, hasExif }: LocationPickerPr
 
       {/* Interactive Map for manual pin selection / adjustment */}
       {showMap && (
-        <div className="border border-[#E5E0D4] rounded-sm overflow-hidden bg-[#FBF9F4]">
-          <div className="bg-[#F4F1EA] px-3 py-1.5 text-[11px] font-mono text-[#57534E] flex justify-between items-center border-b border-[#E5E0D4]">
+        <div className="border border-[#E5E0D4] dark:border-[#333338] rounded-sm overflow-hidden bg-[#FBF9F4] dark:bg-[#222226]">
+          <div className="bg-[#F4F1EA] dark:bg-[#18181B] px-3 py-2 text-[11px] font-mono text-[#57534E] dark:text-[#A1A1AA] flex justify-between items-center border-b border-[#E5E0D4] dark:border-[#333338]">
             <span>Click map or drag the pin to set incident location</span>
             <button
               type="button"
               onClick={() => setShowMap(false)}
-              className="text-[#1C1917] hover:text-[#D9381E] font-mono font-semibold text-xs"
+              className="text-[#1C1917] dark:text-[#F4F4F5] hover:text-[#D9381E] dark:hover:text-[#F05030] font-mono font-semibold text-xs cursor-pointer p-1"
             >
               Done [✕]
             </button>

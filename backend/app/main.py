@@ -20,9 +20,33 @@ LOCAL_NETWORK_ORIGIN_REGEX = re.compile(
     r"^https?://(localhost|127\.0\.0\.1|10\.\d{1,3}\.\d{1,3}\.\d{1,3}|172\.(1[6-9]|2[0-9]|3[0-1])\.\d{1,3}\.\d{1,3}|192\.168\.\d{1,3}\.\d{1,3})(:\d+)?$"
 )
 
+# Vercel deployment preview and production origin pattern
+VERCEL_ORIGIN_REGEX = re.compile(
+    r"^https?://[a-zA-Z0-9-_.]+\.vercel\.app$"
+)
+
+# Render backend service origin pattern
+RENDER_ORIGIN_REGEX = re.compile(
+    r"^https?://[a-zA-Z0-9-_.]+\.onrender\.com$"
+)
+
+def is_allowed_origin(origin: str) -> bool:
+    """Verifies whether an HTTP Origin is authorized for CORS access."""
+    if not origin:
+        return False
+    if origin in config.ALLOWED_ORIGINS:
+        return True
+    if LOCAL_NETWORK_ORIGIN_REGEX.match(origin):
+        return True
+    if VERCEL_ORIGIN_REGEX.match(origin):
+        return True
+    if RENDER_ORIGIN_REGEX.match(origin):
+        return True
+    return False
+
 def create_app(test_config=None) -> Flask:
     """
-    Application factory for the NAGARWATCH REST API.
+    Application factory for the AREAWATCH REST API.
     Configures secure CORS, registers modular blueprints, and binds global error handlers.
     """
     # Validate production configuration if running in production
@@ -38,18 +62,17 @@ def create_app(test_config=None) -> Flask:
         app.config["DEBUG"] = config.DEBUG
         app.config["MAX_CONTENT_LENGTH"] = config.MAX_CONTENT_LENGTH
 
-    # Restrict CORS to configured origins (+ local network subnets in development)
+    # Restrict CORS to configured origins (+ Vercel, Render, and local network subnets)
     cors_origins = list(config.ALLOWED_ORIGINS)
-    if config.DEBUG or not config.is_production:
-        cors_origins.append(LOCAL_NETWORK_ORIGIN_REGEX)
+    cors_origins.extend([LOCAL_NETWORK_ORIGIN_REGEX, VERCEL_ORIGIN_REGEX, RENDER_ORIGIN_REGEX])
 
-    logger.info(f"Configuring CORS for allowed origins: {config.ALLOWED_ORIGINS} (LAN enabled: {not config.is_production})")
+    logger.info(f"Configuring CORS for allowed origins: {config.ALLOWED_ORIGINS} (Vercel & LAN enabled)")
     CORS(
         app,
         resources={r"/api/*": {"origins": cors_origins}},
         supports_credentials=True,
-        methods=["GET", "POST", "PATCH", "DELETE", "OPTIONS"],
-        allow_headers=["Content-Type", "Authorization", "X-Requested-With"]
+        methods=["GET", "POST", "PATCH", "PUT", "DELETE", "OPTIONS"],
+        allow_headers=["Content-Type", "Authorization", "X-Requested-With", "Accept"]
     )
 
     # Register API Blueprints
@@ -59,34 +82,50 @@ def create_app(test_config=None) -> Flask:
     app.register_blueprint(users_bp, url_prefix="/api/v1")
     app.register_blueprint(superadmin_bp, url_prefix="/api/v1")
 
+    @app.route("/api/<path:dummy>", methods=["OPTIONS"])
+    def preflight_options(dummy):
+        """Global preflight OPTIONS handler for CORS preflight validation."""
+        origin = request.headers.get("Origin")
+        response = app.make_default_options_response()
+        if origin and is_allowed_origin(origin):
+            response.headers["Access-Control-Allow-Origin"] = origin
+            response.headers["Access-Control-Allow-Credentials"] = "true"
+            response.headers["Access-Control-Allow-Methods"] = "GET, POST, PATCH, PUT, DELETE, OPTIONS"
+            response.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization, X-Requested-With, Accept"
+            response.headers["Access-Control-Max-Age"] = "86400"
+        return response
+
     @app.after_request
     def ensure_cors_headers(response):
         origin = request.headers.get("Origin")
-        if origin and (origin in config.ALLOWED_ORIGINS or LOCAL_NETWORK_ORIGIN_REGEX.match(origin)):
+        if origin and is_allowed_origin(origin):
             response.headers["Access-Control-Allow-Origin"] = origin
             response.headers["Access-Control-Allow-Credentials"] = "true"
-            response.headers["Access-Control-Allow-Methods"] = "GET, POST, PATCH, DELETE, OPTIONS"
-            response.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization, X-Requested-With"
+            response.headers["Access-Control-Allow-Methods"] = "GET, POST, PATCH, PUT, DELETE, OPTIONS"
+            response.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization, X-Requested-With, Accept"
+            response.headers["Access-Control-Max-Age"] = "86400"
         return response
 
     def _with_cors(response, status=200):
         origin = request.headers.get("Origin")
-        if origin and (origin in config.ALLOWED_ORIGINS or LOCAL_NETWORK_ORIGIN_REGEX.match(origin)):
+        if origin and is_allowed_origin(origin):
             response.headers["Access-Control-Allow-Origin"] = origin
             response.headers["Access-Control-Allow-Credentials"] = "true"
-            response.headers["Access-Control-Allow-Methods"] = "GET, POST, PATCH, DELETE, OPTIONS"
-            response.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization, X-Requested-With"
+            response.headers["Access-Control-Allow-Methods"] = "GET, POST, PATCH, PUT, DELETE, OPTIONS"
+            response.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization, X-Requested-With, Accept"
         return response, status
 
-    # Root Health Check
+    # Root & Production Health Checks (Compatible with Render / Uptime monitors)
     @app.route("/", methods=["GET"])
+    @app.route("/health", methods=["GET"])
     @app.route("/api/v1/health", methods=["GET"])
     def health_check():
         return _with_cors(jsonify({
             "status": "Online",
             "version": "2.0.0",
             "platform": "NAGARWATCH",
-            "message": "NagarWatch Community Safety & Neighbourhood Intelligence Backend is operational."
+            "app": "AREAWATCH",
+            "message": "NagarWatch / AreaWatch Community Safety & Neighbourhood Intelligence Backend is operational."
         }), 200)
 
     # Global Error Handlers

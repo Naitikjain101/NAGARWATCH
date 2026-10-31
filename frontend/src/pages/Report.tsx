@@ -18,6 +18,8 @@ import {
   Sparkles,
   Info,
   Compass,
+  Image as ImageIcon,
+  FolderOpen,
 } from 'lucide-react';
 import apiClient from '../lib/apiClient';
 import { useAuth } from '../context/AuthContext';
@@ -65,6 +67,9 @@ export default function ReportPage() {
   const { user } = useAuth();
   const navigate = useNavigate();
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const cameraInputRef = useRef<HTMLInputElement>(null);
+  const galleryInputRef = useRef<HTMLInputElement>(null);
+  const [isDragging, setIsDragging] = useState(false);
 
   // Form states
   const [file, setFile] = useState<File | null>(null);
@@ -128,15 +133,14 @@ export default function ReportPage() {
     }
   }, [category, severity, description]);
 
-  // Handle image selection with validation & EXIF GPS extraction
-  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedFile = e.target.files?.[0];
+  // Core file validation & processing for camera, gallery, or drop
+  const processSelectedFile = async (selectedFile?: File | null) => {
     if (!selectedFile) return;
 
     // Reset previous file error
     setFormErrors((prev) => ({ ...prev, file: undefined, general: undefined }));
 
-    // File type validation
+    // File type validation (JPEG, PNG, WebP, HEIC)
     if (
       !ALLOWED_MIME_TYPES.includes(selectedFile.type.toLowerCase()) &&
       !selectedFile.name.match(/\.(jpe?g|png|webp|heic)$/i)
@@ -148,7 +152,7 @@ export default function ReportPage() {
       return;
     }
 
-    // File size validation
+    // File size validation (15MB limit)
     if (selectedFile.size > MAX_FILE_SIZE_BYTES) {
       setFormErrors((prev) => ({
         ...prev,
@@ -160,7 +164,7 @@ export default function ReportPage() {
     setPreview(URL.createObjectURL(selectedFile));
     setFile(selectedFile);
 
-    // Attempt to extract GPS from photo EXIF metadata (Priority A)
+    // Attempt to extract GPS from photo EXIF metadata (Priority 1)
     setExtractingExif(true);
     try {
       const exifGps = await extractGpsFromExif(selectedFile);
@@ -181,15 +185,19 @@ export default function ReportPage() {
     }
   };
 
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    await processSelectedFile(e.target.files?.[0]);
+  };
+
   const handleClearFile = () => {
     setFile(null);
     setPreview(null);
     if (location?.source === 'exif') {
       setLocation(null);
     }
-    if (fileInputRef.current) {
-      fileInputRef.current.value = '';
-    }
+    if (fileInputRef.current) fileInputRef.current.value = '';
+    if (cameraInputRef.current) cameraInputRef.current.value = '';
+    if (galleryInputRef.current) galleryInputRef.current.value = '';
   };
 
   // Validate form fields prior to submission
@@ -271,7 +279,12 @@ export default function ReportPage() {
         return;
       }
 
-      if (status === 401) {
+      if (err.code === 'ECONNABORTED' || err.message?.toLowerCase().includes('timeout')) {
+        setFormErrors({
+          general:
+            'Request timed out. If the backend is waking up from sleep on Render, please wait a moment and submit again.',
+        });
+      } else if (status === 401) {
         setFormErrors({
           general: 'Your session has expired. Please log in again before submitting a report.',
         });
@@ -734,34 +747,101 @@ export default function ReportPage() {
               </div>
 
               <div className="space-y-4">
+                {/* Standard file input (preserved for tests and fallback) */}
                 <input
                   ref={fileInputRef}
                   type="file"
-                  accept="image/*"
-                  capture="environment"
+                  accept="image/jpeg,image/png,image/webp,image/jpg,image/*"
                   onChange={handleFileChange}
                   className="hidden"
                   id="evidence-file-input"
                 />
 
+                {/* Option 1: Mobile Camera (Direct Capture) */}
+                <input
+                  ref={cameraInputRef}
+                  type="file"
+                  accept="image/*"
+                  capture="environment"
+                  onChange={handleFileChange}
+                  className="hidden"
+                  id="evidence-camera-input"
+                />
+
+                {/* Option 2: Device Gallery / Library */}
+                <input
+                  ref={galleryInputRef}
+                  type="file"
+                  accept="image/jpeg,image/png,image/webp,image/jpg"
+                  onChange={handleFileChange}
+                  className="hidden"
+                  id="evidence-gallery-input"
+                />
+
                 {!preview ? (
-                  <div
-                    onClick={() => fileInputRef.current?.click()}
-                    className={`border-2 border-dashed rounded-sm p-6 sm:p-8 text-center cursor-pointer transition-colors ${
-                      formErrors.file
-                        ? 'border-[#991B1B] bg-red-50/20 hover:bg-red-50/30'
-                        : 'border-[#E5E0D4] dark:border-[#333338] hover:border-[#D9381E] dark:hover:border-[#F05030] hover:bg-[#F4F1EA] dark:hover:bg-[#18181B]'
-                    }`}
-                  >
-                    <div className="w-12 h-12 rounded-sm bg-[#D9381E]/10 dark:bg-[#F05030]/20 text-[#D9381E] dark:text-[#F05030] border border-[#D9381E]/20 dark:border-[#F05030]/30 flex items-center justify-center mx-auto mb-3">
-                      <Upload className="w-5 h-5" />
+                  <div className="space-y-3">
+                    {/* Drag-and-drop zone for Desktop + Mobile Dual Selectors */}
+                    <div
+                      onDragOver={(e) => {
+                        e.preventDefault();
+                        setIsDragging(true);
+                      }}
+                      onDragLeave={() => setIsDragging(false)}
+                      onDrop={(e) => {
+                        e.preventDefault();
+                        setIsDragging(false);
+                        const dropped = e.dataTransfer.files?.[0];
+                        if (dropped) processSelectedFile(dropped);
+                      }}
+                      className={`border-2 border-dashed rounded-sm p-5 sm:p-7 text-center transition-all ${
+                        isDragging
+                          ? 'border-[#D9381E] dark:border-[#F05030] bg-[#D9381E]/5 dark:bg-[#F05030]/10'
+                          : formErrors.file
+                          ? 'border-[#991B1B] bg-red-50/20 dark:bg-red-950/20'
+                          : 'border-[#E5E0D4] dark:border-[#333338] bg-[#F4F1EA]/60 dark:bg-[#18181B]/60 hover:border-[#D9381E]/50'
+                      }`}
+                    >
+                      <div className="max-w-md mx-auto space-y-3">
+                        <div className="w-11 h-11 rounded-sm bg-[#D9381E]/10 dark:bg-[#F05030]/20 text-[#D9381E] dark:text-[#F05030] border border-[#D9381E]/20 dark:border-[#F05030]/30 flex items-center justify-center mx-auto mb-1">
+                          <Upload className="w-5 h-5" />
+                        </div>
+                        <div>
+                          <p className="text-xs font-mono font-semibold uppercase tracking-wider text-[#1C1917] dark:text-[#F4F4F5]">
+                            Attach Photographic Evidence
+                          </p>
+                          <p className="text-[11px] text-[#78716C] dark:text-[#A1A1AA] mt-0.5">
+                            Take a new live photo or pick an existing image from your device gallery.
+                          </p>
+                        </div>
+
+                        {/* Dual Action Buttons (Min 44px Touch Targets) */}
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1.5">
+                          {/* Option 1: Live Camera */}
+                          <button
+                            type="button"
+                            onClick={() => cameraInputRef.current?.click()}
+                            className="flex items-center justify-center gap-2 px-3 py-2.5 rounded-sm bg-[#D9381E] hover:bg-[#B82810] dark:bg-[#F05030] dark:hover:bg-[#D9381E] text-white text-xs font-mono font-semibold transition-all shadow-xs cursor-pointer min-h-[44px]"
+                          >
+                            <Camera className="w-4 h-4" />
+                            <span>Take a Photo</span>
+                          </button>
+
+                          {/* Option 2: Gallery Selection */}
+                          <button
+                            type="button"
+                            onClick={() => galleryInputRef.current?.click()}
+                            className="flex items-center justify-center gap-2 px-3 py-2.5 rounded-sm bg-[#FBF9F4] dark:bg-[#222226] hover:bg-[#EAE5D9] dark:hover:bg-[#2B2B30] text-[#1C1917] dark:text-[#F4F4F5] border border-[#E5E0D4] dark:border-[#333338] text-xs font-mono font-semibold transition-all cursor-pointer min-h-[44px]"
+                          >
+                            <ImageIcon className="w-4 h-4 text-[#D9381E] dark:text-[#F05030]" />
+                            <span>Choose from Gallery</span>
+                          </button>
+                        </div>
+
+                        <p className="text-[10px] font-mono text-[#78716C] dark:text-[#A1A1AA] pt-1">
+                          Supported formats: JPEG, PNG, WebP • Maximum 15MB
+                        </p>
+                      </div>
                     </div>
-                    <p className="text-xs font-mono font-semibold uppercase tracking-wider text-[#1C1917] dark:text-[#F4F4F5]">
-                      Click to snap photo or select file
-                    </p>
-                    <p className="text-[11px] text-[#78716C] dark:text-[#A1A1AA] mt-1">
-                      Supports JPEG, PNG, WebP up to 15MB
-                    </p>
                   </div>
                 ) : (
                   <div className="relative rounded-sm overflow-hidden border border-[#E5E0D4] dark:border-[#333338] bg-[#F4F1EA] dark:bg-[#18181B] aspect-video">
@@ -770,11 +850,11 @@ export default function ReportPage() {
                       alt="Evidence preview"
                       className="w-full h-full object-cover"
                     />
-                    <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-3 flex items-center justify-between text-white text-xs font-mono">
-                      <span className="truncate max-w-[200px]">
+                    <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 via-black/50 to-transparent p-3 flex items-center justify-between text-white text-xs font-mono">
+                      <span className="truncate max-w-[220px]">
                         {file?.name || 'Evidence Image'}
                       </span>
-                      <span>
+                      <span className="shrink-0 bg-black/40 px-2 py-0.5 rounded-xs border border-white/20">
                         {file ? `${(file.size / (1024 * 1024)).toFixed(2)} MB` : ''}
                       </span>
                     </div>
@@ -782,7 +862,7 @@ export default function ReportPage() {
                       type="button"
                       onClick={handleClearFile}
                       aria-label="Remove photo"
-                      className="absolute top-2.5 right-2.5 p-1.5 rounded-xs bg-[#1C1917]/80 hover:bg-[#1C1917] text-white transition-colors cursor-pointer"
+                      className="absolute top-2.5 right-2.5 p-2 rounded-xs bg-[#1C1917]/85 hover:bg-[#1C1917] text-white transition-colors cursor-pointer min-h-[44px] min-w-[44px] flex items-center justify-center shadow-md"
                     >
                       <X className="w-4 h-4" />
                     </button>

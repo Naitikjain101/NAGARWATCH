@@ -16,6 +16,7 @@ import ReportPage from './pages/Report';
 import DashboardPage from './pages/Dashboard';
 import CivicMedia from './pages/CivicMedia';
 import ProfilePage from './pages/Profile';
+import NotFoundPage from './pages/NotFound';
 
 // ─── Ward Administrator Pages ────────────────────────────────────────────────
 import { AdminOverviewPage } from './pages/admin/AdminOverviewPage';
@@ -100,7 +101,6 @@ export default function App() {
 
           {/* Backward-Compatibility Redirects */}
           <Route path="civic-media" element={<CivicMediaRedirect />} />
-          <Route path="dashboard" element={<Navigate to="/my-reports" replace />} />
 
           {/* Authenticated Citizen Routes */}
           <Route
@@ -120,6 +120,14 @@ export default function App() {
             }
           />
           <Route
+            path="dashboard"
+            element={
+              <ProtectedRoute>
+                <DashboardPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
             path="profile"
             element={
               <ProtectedRoute>
@@ -128,8 +136,8 @@ export default function App() {
             }
           />
 
-          {/* Fallback to home */}
-          <Route path="*" element={<Navigate to="/" replace />} />
+          {/* Authoritative Application-Level 404 Handler */}
+          <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
     </Suspense>
